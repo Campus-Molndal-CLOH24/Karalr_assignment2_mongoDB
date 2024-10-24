@@ -1,46 +1,46 @@
 --- Skriv ovanför och ta inte bort denna raden ---
 
-**Hur jag har strukturerat data i MongoDB**  
-I MongoDB har jag använt en samling (`collection`) som heter "recipes", där varje recept lagras som ett dokument. Varje dokument innehåller fält som namn, tillagningstid, ingredienser och tillagningssteg. Ingredienser och tillagningssteg är representerade som fält med värden av typen array, vilket gör det möjligt att lagra flera värden för dessa attribut.
+**Beskriv hur du har strukturerat din data i MongoDB**  
+Jag har strukturerat data genom att skapa en samling som heter "recipes", där varje enskilt recept lagras som ett dokument. Varje receptdokument innehåller fält för namn, tillagningstid, ingredienser och tillagningssteg. Ingredienser och tillagningssteg är lagrade som array-fält, vilket tillåter flera värden för dessa attribut.
 
 **Jämförelse med en relationsdatabas**  
-I en relationsdatabas skulle jag ha strukturerat detta i flera tabeller. Exempelvis skulle en tabell innehålla receptinformation (namn, tillagningstid) och en annan tabell skulle hantera ingredienser, där varje ingrediens är kopplad till ett recept via en främmande nyckel (foreign key). Detta skiljer sig från MongoDB där all data om ett recept kan lagras som ett enda dokument.
+I en relationsdatabas hade jag skapat flera tabeller, där en tabell skulle innehålla grundläggande information om receptet (som namn och tillagningstid), och andra tabeller skulle användas för att hantera ingredienser och tillagningssteg. Dessa tabeller skulle kopplas samman med främmande nycklar, vilket skulle skapa en tydligare databasstruktur, men samtidigt kräva fler relationer och tabeller än i MongoDB.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 **Skillnader mellan relationsdatabaser och dokumentdatabaser**  
-1. **Struktur**: Relationsdatabaser använder tabeller med rader och kolumner medan dokumentdatabaser (som MongoDB) lagrar data som dokument i samlingar.
-2. **Datamodell**: Relationsdatabaser kräver ett schema, medan dokumentdatabaser är schemalösa, vilket ger större flexibilitet i hur data organiseras.
-3. **Prestanda**: Dokumentdatabaser kan vara snabbare vid hantering av ostrukturerad eller semi-strukturerad data, medan relationsdatabaser ofta är bättre på att hantera komplexa frågor och relationer.
+- **Schema och flexibilitet**: Relationsdatabaser har ett fast schema, vilket innebär att du måste definiera exakt vilka kolumner och datatyper som ska användas. MongoDB har ett schemalöst tillvägagångssätt, vilket innebär att strukturen på data kan variera från ett dokument till ett annat i samma samling.
+- **Prestanda vid skalning**: Dokumentdatabaser som MongoDB är designade för horisontell skalning, vilket gör det enklare att distribuera data över flera servrar. Relationsdatabaser kan också skalas, men horisontell skalning är svårare att implementera.
+- **Relationshantering**: I relationsdatabaser är det lättare att hantera relationer mellan data, exempelvis genom att använda främmande nycklar och relationstabeller. I MongoDB måste relationer hanteras genom att lägga till referenser i dokument, vilket kan vara mer manuellt.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 **Vad är collection, document och field?**  
-- **Collection**: En samling i MongoDB är en grupp av dokument, liknande en tabell i en relationsdatabas.
-- **Document**: Ett dokument är en enhet som innehåller data och motsvarar en rad i en tabell. Det är ett BSON-objekt som består av fält och värden.
-- **Field**: Ett fält är en nyckel i ett dokument som lagrar ett specifikt värde, ungefär som en kolumn i en tabell.
+- **Collection**: En samling (collection) är en grupp dokument i MongoDB, ungefär som en tabell i en relationsdatabas.
+- **Document**: Ett dokument är en enhet som innehåller data och motsvarar en rad i en tabell. Varje dokument består av fält och värden, och det kan ha olika strukturer inom samma samling.
+- **Field**: Ett fält (field) är en nyckel i ett dokument som lagrar ett specifikt värde, som kan vara av olika typer (t.ex. strängar, siffror, arrays, eller till och med andra dokument).
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 **Skillnad på BSON och JSON**  
-- **BSON (Binary JSON)**: BSON är ett binärt format för att representera JSON-liknande dokument. Det används av MongoDB eftersom det är mer effektivt för lagring och överföring, och det tillåter snabbare uppslag.
-- **JSON (JavaScript Object Notation)**: JSON är ett textbaserat format som används för att överföra och lagra data. BSON innehåller extra metadata och stöd för fler datatyper än JSON.
+BSON (Binary JSON) är ett binärt format som MongoDB använder för att lagra data. Det liknar JSON, men är mer kompakt och effektivt för att lagra stora mängder data. BSON stöder även fler datatyper än JSON, vilket gör det mer användbart i en databas. JSON å andra sidan är ett lättviktigt textformat som används för att utbyta data mellan system, men saknar vissa av de optimeringar som BSON har.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 **Analys och reflektion**  
-- **Fördelar**: MongoDB:s schemalösa natur gör det lättare att anpassa sig till förändrade databehov, och dess förmåga att lagra komplexa dokument i ett fält (som arrays) gör det mer flexibelt än relationsdatabaser. Det är också mycket skalbart för stora dataset.
-- **Nackdelar**: Avsaknaden av fasta relationer kan göra det svårare att upprätthålla dataintegritet, och komplexa frågor kan vara svårare att implementera än i en relationsdatabas. Dessutom kan lagringseffektiviteten bli sämre eftersom varje dokument måste inkludera sitt schema i varje instans.
+- **Fördelar**: MongoDB är väldigt flexibelt eftersom det inte kräver ett fördefinierat schema, vilket gör det lättare att hantera ostrukturerad data och snabbt ändra strukturen på dokument utan att behöva ändra hela databasen. Dessutom är det bra för att hantera stora datamängder och att skala upp horisontellt när belastningen ökar.
+- **Nackdelar**: Avsaknaden av fasta relationer kan göra det svårt att upprätthålla dataintegritet, särskilt när man har mycket beroenden mellan olika dokument. Dessutom kan det vara svårare att göra komplexa frågor och analys, eftersom MongoDB inte har samma avancerade frågefunktioner som SQL.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 **Möjligheter och begränsningar i MongoDB**  
-- **Möjligheter**: MongoDB erbjuder stor flexibilitet i datamodellering och kan hantera stora mängder data med hög prestanda genom sin distribuerade arkitektur. Det är också lämpligt för applikationer med snabbt föränderliga krav och dynamiska datastrukturer.
-- **Begränsningar**: MongoDB saknar inbyggt stöd för avancerade transaktioner och relationella dataoperationer som är enklare att hantera i relationsdatabaser. Datareplikering och konsistens kan också vara mer komplicerade att hantera i vissa situationer.
+- **Möjligheter**: MongoDB är bra för applikationer där flexibilitet är viktigt och där strukturen på data förändras ofta. Det passar även för realtidsapplikationer där snabb åtkomst till stora mängder data är avgörande. Dess schemalösa natur gör att man snabbt kan lägga till nya funktioner och anpassa sig efter förändrade behov.
+- **Begränsningar**: MongoDB är inte det bästa valet för applikationer där komplexa transaktioner och starka relationer mellan data är nödvändiga. Stöd för avancerade funktioner som joins och ACID-egenskaper är begränsat i jämförelse med relationsdatabaser.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
-**Reflektion och utvärdering**  
-**Vad jag lärde mig**: Genom att genomföra detta projekt lärde jag mig hur MongoDB fungerar i praktiken, hur CRUD-operationer implementeras, och hur en dokumentdatabas skiljer sig från relationsdatabaser. Jag fick också en bättre förståelse för fördelarna och nackdelarna med schemalös design.
+**Vad lärde du dig genom att genomföra projektet?**  
+Jag lärde mig mycket om hur MongoDB fungerar och hur man hanterar data i en dokumentorienterad databas. Jag fick också en bättre förståelse för hur man strukturerar data utan att behöva definiera ett strikt schema, och hur detta kan användas i projekt som kräver hög flexibilitet.
 
-**Möjligheter för framtida projekt**: Med den erfarenhet jag har fått kan jag se potentialen att använda MongoDB för att bygga flexibla och skalbara lösningar för applikationer som behöver hantera ostrukturerad data. Jag ser också möjligheten att kombinera MongoDB med andra tekniker för att bygga hybridlösningar där vissa delar av systemet använder relationsdatabaser och andra delar använder dokumentdatabaser.
+**Vilka möjligheter ser du för framtida projekt baserat på denna erfarenhet?**  
+Denna erfarenhet öppnar upp för användning av MongoDB i projekt där data kan vara dynamisk och där skalbarhet är viktigt. Jag kan se att det skulle vara användbart i applikationer som hanterar realtidsdata, till exempel i IoT-lösningar eller sociala medieplattformar, där stora mängder data behöver bearbetas snabbt och flexibelt.
