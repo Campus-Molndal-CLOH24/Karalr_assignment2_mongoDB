@@ -3,6 +3,8 @@
 **Beskriv hur du har strukturerat din data i MongoDB**  
 Jag har strukturerat data genom att skapa en samling som heter "recipes", där varje enskilt recept lagras som ett dokument. Varje receptdokument innehåller fält för namn, tillagningstid, ingredienser och tillagningssteg. Ingredienser och tillagningssteg är lagrade som array-fält, vilket tillåter flera värden för dessa attribut.
 
+--- Skriv ovanför och ta inte bort denna raden ---
+
 **Jämförelse med en relationsdatabas**  
 I en relationsdatabas hade jag skapat flera tabeller, där en tabell skulle innehålla grundläggande information om receptet (som namn och tillagningstid), och andra tabeller skulle användas för att hantera ingredienser och tillagningssteg. Dessa tabeller skulle kopplas samman med främmande nycklar, vilket skulle skapa en tydligare databasstruktur, men samtidigt kräva fler relationer och tabeller än i MongoDB.
 
@@ -41,6 +43,8 @@ BSON (Binary JSON) är ett binärt format som MongoDB använder för att lagra d
 
 **Vad lärde du dig genom att genomföra projektet?**  
 Jag lärde mig mycket om hur MongoDB fungerar och hur man hanterar data i en dokumentorienterad databas. Jag fick också en bättre förståelse för hur man strukturerar data utan att behöva definiera ett strikt schema, och hur detta kan användas i projekt som kräver hög flexibilitet.
+
+--- Skriv ovanför och ta inte bort denna raden ---
 
 **Vilka möjligheter ser du för framtida projekt baserat på denna erfarenhet?**  
 Denna erfarenhet öppnar upp för användning av MongoDB i projekt där data kan vara dynamisk och där skalbarhet är viktigt. Jag kan se att det skulle vara användbart i applikationer som hanterar realtidsdata, till exempel i IoT-lösningar eller sociala medieplattformar, där stora mängder data behöver bearbetas snabbt och flexibelt.
