@@ -1,8 +1,9 @@
 
 
-### Struktur och Implementering av MongoDB-filer
+Struktur och Implementering av MongoDB-filer
 
-#### 1. **insert_one.cs** (Lägga till ett recept)
+1. **insert_one.cs** (Lägga till ett recept)
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -22,7 +23,8 @@ var recipe = new BsonDocument
 collection.InsertOne(recipe);
 ```
 
-#### 2. **find.cs** (Visa alla recept)
+2. **find.cs** (Visa alla recept)
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -38,7 +40,8 @@ foreach (var recipe in recipes)
 }
 ```
 
-#### 3. **update_one.cs** (Uppdatera tillagningstiden för "Pancakes")
+3. **update_one.cs** (Uppdatera tillagningstiden för "Pancakes")
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -53,7 +56,8 @@ var update = Builders<BsonDocument>.Update.Set("cookingTime", 25);
 collection.UpdateOne(filter, update);
 ```
 
-#### 4. **delete_one.cs** (Ta bort receptet "Pancakes")
+4. **delete_one.cs** (Ta bort receptet "Pancakes")
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -66,7 +70,8 @@ var filter = Builders<BsonDocument>.Filter.Eq("name", "Pancakes");
 collection.DeleteOne(filter);
 ```
 
-#### 5. **insert_many.cs** (Lägga till exakt 3 recept)
+5. **insert_many.cs** (Lägga till exakt 3 recept)
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -103,7 +108,8 @@ var recipes = new List<BsonDocument>
 collection.InsertMany(recipes);
 ```
 
-#### 6. **update_many.cs** (Uppdatera tillagningstiden för alla recept med 30 minuter)
+6. **update_many.cs** (Uppdatera tillagningstiden för alla recept med 30 minuter)
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -118,7 +124,8 @@ var update = Builders<BsonDocument>.Update.Mul("cookingTime", 2);
 collection.UpdateMany(filter, update);
 ```
 
-#### 7. **delete_many.cs** (Ta bort alla recept med tillagningstid på 60 minuter)
+7. **delete_many.cs** (Ta bort alla recept med tillagningstid på 60 minuter)
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -131,7 +138,8 @@ var filter = Builders<BsonDocument>.Filter.Eq("cookingTime", 60);
 collection.DeleteMany(filter);
 ```
 
-#### 8. **delete_all.cs** (Ta bort alla recept med wildcard)
+8. **delete_all.cs** (Ta bort alla recept med wildcard)
+
 ```csharp
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -143,10 +151,3 @@ var collection = database.GetCollection<BsonDocument>("recipes");
 collection.DeleteMany(new BsonDocument());
 ```
 
-### Instruktioner för körning
-1. Installera MongoDB och MongoDB C#-drivrutinen (`MongoDB.Driver`) i ditt projekt.
-2. Placera varje C#-kod i respektive `.cs`-fil inom en mapp `mongodb_files`.
-3. Kör filerna i ordning från `insert_one.cs` till `delete_all.cs`.
-
-### Avslutning
-Varje fil innehåller de nödvändiga MongoDB-kommandona och genomför CRUD-operationerna enligt uppgiften. Du kan köra filerna i den sekventiella ordningen som beskrivs för att utföra hela flödet.
